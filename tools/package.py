@@ -10,8 +10,8 @@ ROOT = Path(__file__).resolve().parents[1]
 def build(output: Path, skill: bool = False) -> int:
     source = ROOT / 'skills/claude-sentry-skill' if skill else ROOT
     prefix = 'claude-sentry-skill' if skill else 'Claude-Sentry-Skill'
-    allowed_dirs = {'.claude-plugin', 'hooks', 'skills', 'tests', 'tools'}
-    allowed_root = {'README.md', 'LICENSE', '.gitignore'}
+    allowed_dirs = {'.claude-plugin', 'hooks', 'skills', 'tests', 'tools', 'docs'}
+    allowed_root = {'README.md', 'README.en.md', 'LICENSE', '.gitignore'}
     entries = []
     for path in sorted(source.rglob('*')):
         relative = path.relative_to(source)

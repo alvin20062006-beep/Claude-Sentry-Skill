@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="480" viewBox="0 0 1440 480" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Claude Sentry Skill · Claude 哨兵</title>
+  <desc id="desc">Your conversation comes first. A heads-up when it matters. 正常回答优先，提醒恰到好处。</desc>
+  <defs><pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0v48" stroke="#F8F3EA" stroke-opacity=".045"/></pattern></defs>
+  <rect width="1440" height="480" rx="24" fill="#242523"/>
+  <rect width="1440" height="480" rx="24" fill="url(#grid)"/>
+  <circle cx="1190" cy="240" r="210" stroke="#4B4A43"/>
+  <circle cx="1190" cy="240" r="152" stroke="#4B4A43"/>
+  <circle cx="1190" cy="240" r="94" fill="#C56543"/>
+  <path d="M1129 240s24-43 61-43 61 43 61 43-24 43-61 43-61-43-61-43Z" stroke="#FFF7EA" stroke-width="7"/>
+  <circle cx="1190" cy="240" r="22" fill="#FFF7EA"/>
+  <path d="M1190 164v16m0 120v16m-76-76h16m120 0h16" stroke="#FFF7EA" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="1190" cy="30" r="6" fill="#C56543"/>
+  <circle cx="1038" cy="240" r="5" fill="#F8F3EA"/>
+  <circle cx="1284" cy="358" r="5" fill="#C56543"/>
+  <g font-family="Segoe UI, Arial, Microsoft YaHei, sans-serif">
+    <text x="72" y="78" font-size="17" fill="#D9AD94" letter-spacing="4">A QUIET COMPANION FOR CLAUDE</text>
+    <text x="68" y="178" font-size="68" font-weight="650" fill="#F9F4EC" letter-spacing="-2">Claude Sentry Skill</text>
+    <text x="73" y="229" font-size="30" fill="#D8CEC0">Claude 哨兵</text>
+    <text x="73" y="300" font-size="26" fill="#E7DDD0">Your conversation comes first.</text>
+    <text x="73" y="341" font-size="26" fill="#D9AD94">A heads-up when it matters.</text>
+    <text x="73" y="407" font-size="20" fill="#C3B9AA">正常回答优先，提醒恰到好处。</text>
+    <text x="1007" y="436" font-size="13" fill="#C3B9AA" letter-spacing="3">PLUGIN + STANDALONE SKILL</text>
+  </g>
+</svg>

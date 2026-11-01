@@ -1,84 +1,192 @@
-# Claude Sentry Skill · Claude 哨兵
+<div align="center">
 
-面向 Claude 的轻量提醒工具。**正常回答优先，有明确、可观察的信号时只附加一句提醒，没有信号就不添加内容。**
+<img src="docs/assets/banner.svg" alt="Claude Sentry Skill · Claude 哨兵 — 正常回答优先，提醒恰到好处。" width="100%">
 
-不评分、不分级、不预测封号概率，不猜测官方内部标记；不改写、替代或阻断正常回答，不要求用户确认。无需额外模型服务或模型 API Key。
+<br>
 
-## 使用方式
+**让 Claude 专注回答，让哨兵轻声提醒。**<br>
+**Your conversation comes first. A heads-up when it matters.**
 
-| 方式 | 功能 |
-| --- | --- |
-| Claude Code Plugin | 内容主题、客户端可见通知、可选的出口 IP 变化提醒 |
-| 独立 Claude Skill | 当前 Claude 根据可见上下文给出简短提醒，不自动查询 IP 或执行本地 Hooks |
+<p>
+  <a href="https://github.com/alvin20062006-beep/Claude-Sentry-Skill"><img src="https://img.shields.io/badge/version-0.8.2-C56543?style=flat-square" alt="Version 0.8.2"></a>
+  <a href="#quick-start"><img src="https://img.shields.io/badge/Claude_Code-2.1.141%2B-292724?style=flat-square" alt="Claude Code 2.1.141+"></a>
+  <a href="#quick-start"><img src="https://img.shields.io/badge/Python-3.9%2B-427568?style=flat-square" alt="Python 3.9+"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-84735A?style=flat-square" alt="MIT license"></a>
+</p>
 
-两种方式共用一份规则库。提醒可在回复末尾或独立通知中显示；没有回答正文的 IP 变化和客户端错误也可独立提醒。检测失败不阻断交流。
+**简体中文** · [English](README.en.md)<br>
+[项目主页](https://alvin20062006-beep.github.io/Claude-Sentry-Skill/) · [快速开始](#quick-start) · [独立 Skill](#standalone-skill) · [常见问题](#faq)
 
-## Claude Code Plugin
+</div>
 
-需要 Claude Code **2.1.141+**、Python **3.9+** 和 Bash；Windows 使用 Git Bash。系统通知需要兼容的终端和通知设置。
+---
 
-进入仓库目录，检查并临时加载：
+## ✦ 一句话认识 Claude 哨兵
+
+**Claude Sentry Skill 是专门面向 Claude 的轻量提醒工具，提供 Claude Code Plugin 和独立 Skill 两种用法。** 发现明确、可观察的信号时，在正常回答之外补充一句简短提醒；没有信号，就不增加任何内容。
+
+> **正常回答永远优先。** 不评分、不分级、不估算封号概率，不猜测官方内部标记；不改写、替代、暂停或阻断回答，不要求用户确认。
+
+| 你关心的事 | Claude 哨兵的做法 |
+| :--- | :--- |
+| 💬 保持对话流畅 | Claude 照常回答，提醒只作为额外的一句话 |
+| 🔎 看得见的依据 | 依据可见内容、客户端事件与已启用的环境观测提醒 |
+| 🌐 出口 IP 变化 | 每次成功观测到变化都提醒，包括同国家换 IP、A→B→A |
+| 🤫 避免重复打扰 | 同一信号合理去重，没有新信号就保持安静 |
+| 🧩 两种使用方式 | Plugin 与独立 Skill 共用一份核心规则 |
+| 🪶 轻量运行 | Hook 使用 Python 标准库，无额外模型、数据库或模型 API Key |
+
+## ◉ 提醒是什么样的？
+
+下面是**交互示意**，不是实际客户端截图：
+
+```text
+Claude 的正常回答
+────────────────────────────────────────────────────────
+这个函数会遍历商品列表，将每项商品的价格相加后返回总额。
+
+额外提醒（仅在出现对应信号时）
+────────────────────────────────────────────────────────
+Claude 哨兵提醒：检测到出口 IP 已变化，仅供参考，不代表官方内部标记。
+```
+
+没有信号时，只保留正常回答，不输出“无需提醒”等占位内容。IP 变化、客户端错误等事件没有回答正文时，允许 Hook 独立提醒。提醒的显示方式取决于客户端和终端支持。
+
+<a id="quick-start"></a>
+
+## ⚡ 快速开始
+
+**环境要求：** Claude Code **2.1.141+**、Python **3.9+**、Bash。Windows 使用 Git Bash。
 
 ```bash
+git clone https://github.com/alvin20062006-beep/Claude-Sentry-Skill.git
+cd Claude-Sentry-Skill
 claude plugin validate .
 claude --plugin-dir .
 ```
 
-退出后，下次启动时省略 `--plugin-dir` 即停止加载。避免同时注册重复的 Hooks。
+这是临时加载方式；退出后，下次启动时省略 `--plugin-dir` 即停止加载。避免重复注册同一套 Hooks。
 
-### 可选：出口 IP 变化提醒
+### 可选：开启出口 IP 变化提醒
 
-默认不查询网络。需要启用时，在启动 Claude 前设置：
+**默认不查询网络。** 需要时，在启动 Claude 之前设置：
+
+<details>
+<summary><b>Bash / Git Bash</b></summary>
 
 ```bash
-# Bash / Git Bash
 export CST_REGION_CHECK=1
 export CST_REGION_LOOKUP=1
+claude --plugin-dir .
 ```
+
+</details>
+
+<details>
+<summary><b>PowerShell</b></summary>
 
 ```powershell
-# PowerShell
 $env:CST_REGION_CHECK = '1'
 $env:CST_REGION_LOOKUP = '1'
+claude --plugin-dir .
 ```
 
-首次成功取得 IP 提醒一次；此后每次成功观测到变化都重新提醒，包括同国家换 IP 和 A→B→A。相同状态合理去重，查询失败会说明无法检测。检测发生在会话启动或提交消息时，不覆盖两次观测之间的变化。
+</details>
 
-启用查询后会访问 `https://ipwho.is/`，该服务会看到运行端出口 IP，不会收到聊天内容。远程开发时观测的是脚本运行端。
+首次成功取得 IP 提醒一次；此后每次成功观测到变化都重新提醒。查询失败会提示无法检测，并保留已有基线。检测发生在会话启动或提交消息时，**不是持续监控**，不会补报两次观测之间未被观察到的变化。
 
-### 本地记录
+启用查询后会访问 `https://ipwho.is/`。该服务会看到脚本运行端的出口 IP，不会收到聊天内容；在远程环境运行时，观察的是远程运行端。
 
-默认状态文件为 `~/.claude/cst-local-state-v07.json`，可通过 `CST_STATE_FILE` 指定私有目录。状态保存加盐 IP 摘要，不保存原始 IP 或聊天全文；Windows 文件权限继承所在目录。
+<a id="standalone-skill"></a>
 
-查看最近产生的提醒：
+## 🧩 独立 Skill
 
-```bash
-python hooks/transparency.py --notices
-```
-
-记录中的 `delivery: unverified` 表示**没有送达回执**。有记录不代表系统弹窗已显示。无头模式、SDK、部分 IDE 和终端不支持完整通知显示。
-
-## 独立 Skill
-
-`skills/claude-sentry-skill/` 可独立使用，包含 `SKILL.md` 和所需规则。导出上传包：
+不使用 Claude Code 时，可独立使用 [`skills/claude-sentry-skill/`](skills/claude-sentry-skill/)。导出上传包：
 
 ```bash
 python tools/package.py --skill ../Claude-Sentry-Skill-standalone-v0.8.2.zip
 ```
 
-在 Claude 的 Skills 管理界面上传并启用，可用“请用 Claude 哨兵解释这条可见通知”调用。禁用或移除即可停止使用。完整仓库 ZIP 不作为独立 Skill 上传包。
+在支持自定义 Skills 的 Claude 界面上传并启用，可主动调用：**“请用 Claude 哨兵解释这条可见通知。”** 禁用或移除即可停止使用；完整仓库 ZIP 不作为独立 Skill 上传包。
 
-## 配套参考
+| 能力 | Claude Code Plugin | 独立 Claude Skill |
+| :--- | :--- | :--- |
+| 根据可见内容提供简短提醒 | ✓ | ✓ |
+| 共用核心规则库 | ✓ | ✓ |
+| 自动执行本地 Hooks | ✓ | — |
+| 查询出口 IP | 用户启用后 | — |
+| 观察客户端 Hook 事件 | ✓ | — |
+| 读取本地会话记录 | 仅 Claude Code 提供的记录 | — |
 
-可以配合 [Auwait 网络工具](https://auwait.com/network-tools/#ai) 使用。网站的评分、封号相关信息供用户独立参考，与 Claude 哨兵的标记提醒用途不同；本插件不自动访问或采用网站的评分。
+独立 Skill 由用户调用或由 Claude 按相关性加载，**不保证每轮自动执行**。
 
-## 版本与测试
+## 🔐 隐私与本地记录
 
-当前版本：**0.8.2**。已完成 Windows 基础验证；完整客户端交互、系统弹窗和 Linux/macOS 兼容性仍待进一步验证。政策与地区数据是有日期的参考快照，不作为当前违规结论；使用时核对有效日期。
+- 默认状态文件：`~/.claude/cst-local-state-v07.json`；可用 `CST_STATE_FILE` 指定私有目录。
+- 保存加盐 IP 摘要和少量提醒状态，不保存原始 IP 或聊天全文。
+- Windows 文件权限继承所在目录，应将状态文件放在适当的私有目录。
+- 本地提醒记录中的 `delivery: unverified` 表示没有送达回执，**不代表系统弹窗已显示**。无头模式、SDK、部分 IDE 和终端不支持完整通知显示。
 
 ```bash
+# 查看最近产生的提醒
+python hooks/transparency.py --notices
+```
+
+<a id="faq"></a>
+
+## ❔ 常见问题
+
+<details>
+<summary><b>这是评分工具，或者能知道 Claude 的内部风控吗？</b></summary>
+
+不是。项目只对明确、可观察的信号作提醒，不提供评分、风险等级、封号概率或后台标记。出现提醒不代表违规，没有提醒也不是安全保证。
+
+</details>
+
+<details>
+<summary><b>会改变 Claude 的正常输出吗？需要本地模型吗？</b></summary>
+
+规则要求正常回答优先，提醒只能附加或独立显示，不能替代正文。Hook 检测失败不得影响正常交流。内容解释由当前 Claude 完成，Hook 使用本地确定性规则，不连接额外 LLM 或本地模型。
+
+</details>
+
+<details>
+<summary><b>可以与 Auwait 网络工具一起用吗？</b></summary>
+
+可以配合 [Auwait 网络工具](https://auwait.com/network-tools/#ai) 使用。网站的评分、封号相关信息供用户独立参考，与本项目的标记提醒用途不同；本插件不自动访问或采用网站的评分。
+
+</details>
+
+<details>
+<summary><b>政策和地区数据是实时的吗？</b></summary>
+
+不是。它们是有日期的参考快照，使用时需核对有效日期，不直接作为当前违规结论。项目不提供申诉、账号恢复或封号原因判定功能。
+
+</details>
+
+## ✓ 当前验证状态
+
+**v0.8.2：48 项自动化测试通过，Claude Code 插件校验通过，已完成 Windows 基础验证。**
+
+完整客户端交互、系统弹窗实际送达、Linux/macOS 兼容性及独立 Skill 上传体验仍待补充验证。未经实际验证的行为不作为完成承诺。
+
+```bash
+# 测试
 python -X utf8 -B -m unittest discover -s tests -v
+
+# 导出完整项目
 python tools/package.py --full ../Claude-Sentry-Skill-v0.8.2-full.zip
 ```
 
-许可证：[MIT](LICENSE)。
+---
+
+<div align="center">
+
+**让对话继续，让提醒到位。**<br>
+如果这个项目对你有帮助，欢迎点一颗 **Star ⭐**。
+
+[项目主页](https://alvin20062006-beep.github.io/Claude-Sentry-Skill/) · [反馈问题](https://github.com/alvin20062006-beep/Claude-Sentry-Skill/issues) · [MIT License](LICENSE)
+
+面向 Claude 的独立项目，与 Anthropic 无隶属关系。
+
+</div>

@@ -12,7 +12,6 @@ dist/
 
 work/
 outputs/
-docs/
 *.patch
 SOURCES.md
 FILE_CHANGES.json

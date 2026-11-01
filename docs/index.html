@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f3ec">
+  <title>Claude Sentry Skill · Claude 哨兵</title>
+  <meta name="description" content="让 Claude 专注回答，让哨兵轻声提醒。Claude Code Plugin 与独立 Skill，正常回答优先，只提醒，不评分。">
+  <meta property="og:title" content="Claude Sentry Skill · Claude 哨兵">
+  <meta property="og:description" content="Your conversation comes first. A heads-up when it matters. 正常回答优先，提醒恰到好处。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://alvin20062006-beep.github.io/Claude-Sentry-Skill/">
+  <link rel="canonical" href="https://alvin20062006-beep.github.io/Claude-Sentry-Skill/">
+  <link rel="icon" href="assets/sentry.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main"><span data-lang="zh">跳到正文</span><span data-lang="en">Skip to content</span></a>
+  <header class="site-header wrap">
+    <a class="brand" href="#" aria-label="Claude Sentry Skill home">
+      <img src="assets/sentry.svg" width="36" height="36" alt="">
+      <span>Claude <strong>Sentry</strong><small>SKILL</small></span>
+    </a>
+    <nav aria-label="Main navigation / 主导航">
+      <a href="#approach"><span data-lang="zh">工作方式</span><span data-lang="en">How it works</span></a>
+      <a href="#start"><span data-lang="zh">开始使用</span><span data-lang="en">Get started</span></a>
+      <a href="#questions">FAQ</a>
+    </nav>
+    <div class="language" role="group" aria-label="Language / 语言">
+      <button type="button" data-set-lang="zh" aria-pressed="true" lang="zh-CN">中</button>
+      <span aria-hidden="true">/</span>
+      <button type="button" data-set-lang="en" aria-pressed="false" lang="en">EN</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="tiny-eye" aria-hidden="true">◉</span> A QUIET COMPANION FOR CLAUDE</div>
+        <h1 id="hero-title"><span data-lang="zh">让对话继续。<br><em>让提醒到位。</em></span><span data-lang="en">Your flow.<br><em>A quiet heads-up.</em></span></h1>
+        <p class="hero-description"><span data-lang="zh">Claude 正常回答永远优先。只有出现明确、可观察的信号时，哨兵才在回答之外，补上一句简短提醒。</span><span data-lang="en">Claude’s normal response always comes first. When a clear, observable signal appears, Sentry adds one brief notice alongside it.</span></p>
+        <div class="actions">
+          <a class="button primary" href="#start"><span data-lang="zh">开始使用</span><span data-lang="en">Get started</span><span aria-hidden="true">↗</span></a>
+          <a class="button secondary" href="https://github.com/alvin20062006-beep/Claude-Sentry-Skill">View on GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="hero-footnote"><span class="version">v0.8.2</span><span>Claude Code Plugin + Standalone Skill</span></div>
+      </div>
+
+      <div class="demo-stage">
+        <div class="orbit orbit-one" aria-hidden="true"></div><div class="orbit orbit-two" aria-hidden="true"></div>
+        <div class="demo-window">
+          <div class="window-bar"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>conversation</span><span class="window-tag">CLAUDE + SENTRY</span></div>
+          <div class="conversation">
+            <div class="message-label"><span class="avatar user-avatar" aria-hidden="true">↗</span><span data-lang="zh">你</span><span data-lang="en">You</span></div>
+            <p class="user-message"><span data-lang="zh">帮我解释这个函数。</span><span data-lang="en">Help me understand this function.</span></p>
+            <pre class="sample-code"><code><span class="code-accent">def</span> total_price(items):
+    <span class="code-accent">return</span> sum(item.price <span class="code-accent">for</span> item <span class="code-accent">in</span> items)</code></pre>
+            <div class="message-label answer-label"><span class="avatar claude-avatar" aria-hidden="true">✳</span>Claude</div>
+            <p class="normal-answer"><span data-lang="zh">这个函数会遍历商品列表，将每项商品的价格相加后返回总额。</span><span data-lang="en">This function loops through the items, adds their prices, and returns the total.</span></p>
+            <div class="notice-space" aria-live="polite" aria-atomic="true">
+              <div class="demo-notice" id="demo-notice" hidden>
+                <img src="assets/sentry.svg" width="23" height="23" alt="">
+                <p><span data-lang="zh">Claude 哨兵提醒：检测到出口 IP 已变化，仅供参考，不代表官方内部标记。</span><span data-lang="en">Claude Sentry: An outbound IP change was detected; this is for reference and does not indicate an internal account flag.</span></p>
+              </div>
+            </div>
+          </div>
+          <div class="demo-controls">
+            <span class="try-label"><span data-lang="zh">切换示意</span><span data-lang="en">Try a scenario</span><span aria-hidden="true"> ↘</span></span>
+            <div class="scenario-switch" role="group" aria-label="Illustrative scenario / 交互示意场景">
+              <button type="button" data-scenario="quiet" aria-pressed="true"><span data-lang="zh">无新信号</span><span data-lang="en">No new signal</span></button>
+              <button type="button" data-scenario="ip" aria-pressed="false"><span data-lang="zh">IP 变化</span><span data-lang="en">IP change</span></button>
+            </div>
+          </div>
+        </div>
+        <p class="demo-caption"><span data-lang="zh">交互示意，非真实客户端截图。此页面不检测你的 IP。</span><span data-lang="en">Illustration, not a client screenshot. This page does not check your IP; the English notice is a translation.</span></p>
+      </div>
+    </section>
+
+    <div class="principles wrap">
+      <div><span class="index">01 /</span><p><span data-lang="zh">正常回答优先</span><span data-lang="en">Your answer comes first</span></p></div>
+      <div><span class="index">02 /</span><p><span data-lang="zh">有信号，才提醒</span><span data-lang="en">A notice needs a signal</span></p></div>
+      <div><span class="index">03 /</span><p><span data-lang="zh">没信号，就安静</span><span data-lang="en">Nothing new? Stay quiet.</span></p></div>
+    </div>
+
+    <section class="section wrap" id="approach" aria-labelledby="approach-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">SMALL NOTICE. CLEAR BOUNDARIES.</p><h2 id="approach-title"><span data-lang="zh">一套规则，<br>两种用法。</span><span data-lang="en">One set of rules.<br>Two ways to use it.</span></h2></div>
+        <p class="section-intro"><span data-lang="zh">从终端里的本地事件，到 Claude 可见的对话内容。选择适合你的方式，保持同一个简单约定：只提醒，正常交流照常继续。</span><span data-lang="en">From local events in your terminal to the conversation Claude can see. Choose your setup with one simple promise: advisory notices, with normal conversation continuing.</span></p>
+      </div>
+      <div class="editions">
+        <article class="edition"><div class="edition-top"><span class="edition-icon" aria-hidden="true">&gt;_</span><span class="label">IN YOUR TERMINAL</span></div><h3>Claude Code Plugin</h3><p><span data-lang="zh">在 Claude Code 的生命周期事件中运行本地 Hook，识别内容主题、可见客户端通知，以及你主动开启的出口 IP 变化。</span><span data-lang="en">Local Hooks run at Claude Code lifecycle events, observing content topics, visible client notices, and outbound IP changes when you enable them.</span></p><ul><li><span data-lang="zh">每次成功观测到 IP 变化都重新提醒</span><span data-lang="en">A fresh notice for each observed IP change</span></li><li><span data-lang="zh">没有回答正文时，也可独立提醒</span><span data-lang="en">Standalone notices when there is no answer</span></li><li><span data-lang="zh">Python 标准库，无额外模型服务</span><span data-lang="en">Python standard library, no extra model service</span></li></ul><a class="text-link" href="#start"><span data-lang="zh">加载 Plugin</span><span data-lang="en">Load the Plugin</span> <span aria-hidden="true">↗</span></a></article>
+        <article class="edition"><div class="edition-top"><span class="edition-icon" aria-hidden="true">✳</span><span class="label">IN YOUR CONVERSATION</span></div><h3><span data-lang="zh">独立 Claude Skill</span><span data-lang="en">Standalone Claude Skill</span></h3><p><span data-lang="zh">由当前 Claude 根据可见上下文给出简短提醒。用户主动调用，或由 Claude 在判断相关时加载。</span><span data-lang="en">The current Claude uses visible context to provide a brief notice. Invoke it yourself, or let Claude load it when relevant.</span></p><ul><li><span data-lang="zh">与 Plugin 共用一份核心规则</span><span data-lang="en">The same core rules as the Plugin</span></li><li><span data-lang="zh">不自动查询 IP 或读取其他会话</span><span data-lang="en">No automatic IP lookups or other chat access</span></li><li><span data-lang="zh">不保证每轮自动执行</span><span data-lang="en">Not guaranteed to run on every turn</span></li></ul><a class="text-link" href="#start" data-open-install="skill"><span data-lang="zh">使用独立 Skill</span><span data-lang="en">Use the standalone Skill</span> <span aria-hidden="true">↗</span></a></article>
+      </div>
+    </section>
+
+    <section class="setup-section" id="start" aria-labelledby="start-title">
+      <div class="setup-grid wrap">
+        <div class="setup-copy"><p class="eyebrow">MAKE ROOM FOR A SMALL HEADS-UP</p><h2 id="start-title"><span data-lang="zh">几步，<br>开始使用。</span><span data-lang="en">A few steps.<br>You’re ready.</span></h2><p><span data-lang="zh">从仓库开始，选择 Plugin 或独立 Skill。网络查询默认关闭，由你决定是否开启。</span><span data-lang="en">Start with the repository and choose the Plugin or standalone Skill. Network lookups are off until you choose to enable them.</span></p><a class="text-link" data-readme-link href="https://github.com/alvin20062006-beep/Claude-Sentry-Skill#readme"><span data-lang="zh">阅读完整安装说明</span><span data-lang="en">Read the full setup guide</span> <span aria-hidden="true">↗</span></a></div>
+        <div class="install-box">
+          <div class="install-switch" role="group" aria-label="Installation method / 安装方式"><button type="button" data-install="plugin" aria-pressed="true">Code Plugin</button><button type="button" data-install="skill" aria-pressed="false"><span data-lang="zh">独立 Skill</span><span data-lang="en">Standalone Skill</span></button></div>
+          <div id="install-plugin" class="install-panel">
+            <div class="code-heading"><span>TERMINAL</span><button class="copy-button" type="button" data-copy="plugin-code"><span data-lang="zh">复制</span><span data-lang="en">Copy</span><span aria-hidden="true"> ⧉</span></button></div>
+            <pre><code id="plugin-code">git clone https://github.com/alvin20062006-beep/Claude-Sentry-Skill.git
+cd Claude-Sentry-Skill
+claude plugin validate .
+claude --plugin-dir .</code></pre>
+            <p class="requirements"><span data-lang="zh">需要 Claude Code 2.1.141+、Python 3.9+ 和 Bash。Windows 使用 Git Bash。</span><span data-lang="en">Requires Claude Code 2.1.141+, Python 3.9+, and Bash. Use Git Bash on Windows.</span></p>
+            <p class="install-note"><span data-lang="zh">仅对本次启动加载；退出后，下次省略 <code>--plugin-dir</code> 即停止加载。</span><span data-lang="en">Loaded for this launch. Quit and omit <code>--plugin-dir</code> next time to stop loading it.</span></p>
+          </div>
+          <div id="install-skill" class="install-panel" hidden>
+            <div class="code-heading"><span>TERMINAL</span><button class="copy-button" type="button" data-copy="skill-code"><span data-lang="zh">复制</span><span data-lang="en">Copy</span><span aria-hidden="true"> ⧉</span></button></div>
+            <pre><code id="skill-code">git clone https://github.com/alvin20062006-beep/Claude-Sentry-Skill.git
+cd Claude-Sentry-Skill
+python tools/package.py --skill ../Claude-Sentry-Skill-standalone-v0.8.2.zip</code></pre>
+            <p class="requirements"><span data-lang="zh">用 Python 3.9+ 导出，然后在支持自定义 Skills 的 Claude 界面上传并启用。</span><span data-lang="en">Export with Python 3.9+, then upload and enable it in a Claude interface that supports custom Skills.</span></p>
+            <p class="install-note"><span data-lang="zh">调用示例：“请用 Claude 哨兵解释这条可见通知。”</span><span data-lang="en">Try: “Use Claude Sentry to explain this visible notice.”</span></p>
+          </div>
+          <p class="copy-status" id="copy-status" role="status"></p>
+          <noscript><p class="noscript-note">独立 Skill 安装步骤见 README。 / See the README for standalone Skill setup.</p></noscript>
+        </div>
+      </div>
+    </section>
+
+    <section class="section wrap details-grid" aria-labelledby="boundaries-title">
+      <div><p class="eyebrow">THOUGHTFULLY LIMITED</p><h2 id="boundaries-title"><span data-lang="zh">轻一点，<br>也清楚一点。</span><span data-lang="en">A lighter touch.<br>Clearer boundaries.</span></h2><p class="section-intro"><span data-lang="zh">提醒只提供参考。项目不评分、不分级、不估算封号概率，也不猜测 Claude 的内部标记。</span><span data-lang="en">Notices are for reference. Sentry does not score, assign risk levels, predict bans, or guess Claude’s internal account flags.</span></p></div>
+      <div class="detail-list">
+        <article><span class="detail-number">01</span><div><h3><span data-lang="zh">只观察你开启的网络变化</span><span data-lang="en">Network observations are opt-in</span></h3><p><span data-lang="zh">启用查询后，ipwho.is 会看到运行端出口 IP，不会收到聊天内容。会话启动或提交消息时检查，不是持续监控。</span><span data-lang="en">When enabled, ipwho.is sees the runtime’s outbound IP, never chat contents. Checks run at session start or prompt submission, not continuously.</span></p></div></article>
+        <article><span class="detail-number">02</span><div><h3><span data-lang="zh">本地状态，尽量少留</span><span data-lang="en">Minimal local state</span></h3><p><span data-lang="zh">保存加盐 IP 摘要和少量提醒状态，不保存原始 IP 或聊天全文。本地记录不等于通知已送达。</span><span data-lang="en">Stores a salted IP digest and limited notice state, not raw IP addresses or full chat text. A local record is not a delivery receipt.</span></p></div></article>
+        <article><span class="detail-number">03</span><div><h3><span data-lang="zh">查询失败，交流继续</span><span data-lang="en">Detection can fail; conversation continues</span></h3><p><span data-lang="zh">检测失败不得阻断 Claude。每次成功观测到的 IP 变化都重新提醒，包括同国家换 IP 和 A→B→A。</span><span data-lang="en">Detection failures must not block Claude. Every successfully observed IP change gets a fresh notice, including same-country changes and A→B→A.</span></p></div></article>
+      </div>
+    </section>
+
+    <section class="verification wrap" aria-labelledby="verification-title"><div class="verification-symbol" aria-hidden="true">↗</div><div><h2 id="verification-title"><span data-lang="zh">进度如实写，能力如实说。</span><span data-lang="en">Clear about what’s been checked.</span></h2><p><span data-lang="zh">v0.8.2 已通过 48 项自动化测试与插件校验，完成 Windows 基础验证。完整客户端交互、系统弹窗实际送达、Linux/macOS 及独立 Skill 上传体验仍待验证。</span><span data-lang="en">v0.8.2 passed 48 automated tests and plugin validation, with basic Windows validation completed. Full client interactions, actual system notification delivery, Linux/macOS, and standalone Skill uploads still need validation.</span></p></div></section>
+
+    <section class="section wrap faq-section" id="questions" aria-labelledby="faq-title">
+      <div><p class="eyebrow">A LITTLE MORE CONTEXT</p><h2 id="faq-title"><span data-lang="zh">你可能想问。</span><span data-lang="en">Good questions.</span></h2></div>
+      <div class="faq-list">
+        <details><summary><span data-lang="zh">会改变 Claude 的正常回答吗？</span><span data-lang="en">Does Sentry change Claude’s normal answer?</span></summary><p><span data-lang="zh">规则要求正常回答永远优先。提醒只能附加或独立显示，不能改写、替代、暂停或阻断回答，也不要求额外确认。没有信号时，不添加任何内容。</span><span data-lang="en">The rules always prioritize the normal response. Notices may be additional or standalone, but must not rewrite, replace, pause, or block the answer or ask for extra confirmation. With no signal, nothing is added.</span></p></details>
+        <details><summary><span data-lang="zh">需要本地模型或额外 API Key 吗？</span><span data-lang="en">Do I need a local model or another API key?</span></summary><p><span data-lang="zh">不需要。内容解释由当前 Claude 完成，Hook 使用确定性的本地规则，不接入额外模型、数据库或模型 API。你仍需要正常使用 Claude 所需的环境。</span><span data-lang="en">No. The current Claude interprets visible context; Hooks use deterministic local rules without an extra model, database, or model API. You still need your normal Claude setup.</span></p></details>
+        <details><summary><span data-lang="zh">可以配合 Auwait 网络工具使用吗？</span><span data-lang="en">Can I use it with Auwait’s network tools?</span></summary><p><span data-lang="zh">可以。<a href="https://auwait.com/network-tools/#ai">Auwait 网络工具</a>的评分、封号相关信息是供用户独立参考的，与本项目的提醒用途不同。本插件不自动访问或采用网站的评分。</span><span data-lang="en">Yes. Scoring and account-ban information on <a href="https://auwait.com/network-tools/#ai">Auwait’s network tools</a> is a separate reference for users, distinct from Sentry’s notices. The plugin does not automatically access or adopt its scores.</span></p></details>
+        <details><summary><span data-lang="zh">提醒是否代表违规或官方内部标记？</span><span data-lang="en">Does a notice mean a violation or an internal flag?</span></summary><p><span data-lang="zh">不代表。提醒仅基于可观察信号，政策与地区数据是有日期的参考快照，应核对有效日期。没有提醒也不是安全保证。项目不提供申诉或账号恢复功能。</span><span data-lang="en">No. Notices are based only on observable signals. Policy and region data are dated snapshots; check their effective dates. Silence is not a safety guarantee. This project does not provide appeals or account recovery.</span></p></details>
+      </div>
+    </section>
+
+    <section class="closing wrap"><img src="assets/sentry.svg" alt="" width="50" height="50"><h2><span data-lang="zh">你的对话，始终是主角。</span><span data-lang="en">Your conversation. Still yours.</span></h2><a class="button primary" href="https://github.com/alvin20062006-beep/Claude-Sentry-Skill"><span data-lang="zh">在 GitHub 查看</span><span data-lang="en">Explore on GitHub</span><span aria-hidden="true">↗</span></a></section>
+  </main>
+
+  <footer class="site-footer wrap"><div><span class="footer-brand">Claude Sentry Skill <span>· Claude 哨兵</span></span><p><span data-lang="zh">面向 Claude 的独立项目，与 Anthropic 无隶属关系。</span><span data-lang="en">An independent project for Claude. Not affiliated with Anthropic.</span></p></div><div class="footer-links"><a href="https://github.com/alvin20062006-beep/Claude-Sentry-Skill">GitHub ↗</a><a href="https://github.com/alvin20062006-beep/Claude-Sentry-Skill/blob/main/LICENSE">MIT License ↗</a><a href="https://github.com/alvin20062006-beep/Claude-Sentry-Skill/issues"><span data-lang="zh">反馈</span><span data-lang="en">Feedback</span> ↗</a></div></footer>
+</body>
+</html>
