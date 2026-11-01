@@ -46,8 +46,12 @@ def compiled_rules() -> tuple:
             continue
         try:
             rules.append((str(rule.get('title', '公开政策相关请求')),
-                          tuple(re.compile(p, re.I) for p in rule.get('patterns', []))))
-        except (re.error, TypeError):
+                          tuple(re.compile(p, re.I) for p in rule.get('patterns', [])),
+                          tuple((re.compile(group['action'], re.I),
+                                 tuple(re.compile(p, re.I) for p in group['all_of']))
+                                for group in rule.get('signal_groups', [])
+                                if group.get('all_of'))))
+        except (re.error, TypeError, KeyError):
             continue
     return tuple(rules)
 
@@ -56,6 +60,8 @@ FRAUD_EDUCATION = re.compile(
     r'(?i)(?:识别|辨别|辨识|防范|预防|防止|举报|报告|防御|检测|识破)'
     r'(?:常见的?|潜在的?|可能的?|电话|网络|电信|恋爱|约会|银行|这些|这类|此类|的)*'
     r'(?:诈骗|欺诈|钓鱼)(?:电话|短信|邮件|话术|网站)?'
+    r'|(?:识别|辨别|检测|举报)(?:别人|他人|的|是否|已经|被|有人)*'
+    r'(?:伪造|假冒|假)(?:的)?(?:证件|身份证|护照|工资单|收入证明|医生证明)'
     r'|\b(?:recogniz(?:e|ing)|identify(?:ing)?|detect(?:ing)?|prevent(?:ing)?|report(?:ing)?|avoid(?:ing)?)'
     r'\s+(?:(?:a|the|common|potential|phone|online|romance|bank)\s+)*'
     r'(?:scams?|fraud|phishing)(?:\s+(?:calls?|messages?|emails?|scripts?))?\b'
@@ -65,6 +71,30 @@ FRAUD_EDUCATION = re.compile(
 def content_signal_text(text: str) -> str:
     """Mask narrow prevention phrases; keep other requests in the same message."""
     return FRAUD_EDUCATION.sub(lambda match: ' ' * len(match.group()), text)
+
+
+# These are observable lexical combinations, not semantic intent classification.
+NON_OPERATIONAL_PREFIX = re.compile(
+    r'(?:识别|辨别|检测|防止|防范|预防|举报|不要|不能|不应|禁止|别)'
+    r'(?:有人|别人|他人|用户|去|再|继续|如何|怎么|的|\s){0,6}$'
+    r'|\b(?:detect|detecting|prevent|preventing|report|reporting|do not|don.t|never)\s+(?:people\s+from\s+)?$', re.I)
+
+
+def grouped_hits(sample: str, groups: tuple) -> bool:
+    """Require an action and every evidence group within a bounded sentence span.
+
+    Groups are alternatives; all_of entries are required together. No cross-sentence
+    aggregation: a benign request cannot borrow a target from another sentence.
+    """
+    for sentence in re.split(r'[。！？!?;；\n]|\.(?:\s|$)', sample):
+        for action, evidence in groups:
+            for match in action.finditer(sentence):
+                if NON_OPERATIONAL_PREFIX.search(sentence[max(0, match.start() - 48):match.start()]):
+                    continue
+                nearby = sentence[max(0, match.start() - 80):match.end() + 160]
+                if all(pattern.search(nearby) for pattern in evidence):
+                    return True
+    return False
 
 
 def regex_hits(text: str) -> list[str]:
@@ -77,8 +107,9 @@ def regex_hits(text: str) -> list[str]:
     # O(ceil(n/12000) * rule_count); cap a single window, not the complete input.
     for at in range(0, len(text) or 1, 11000):
         sample = text[at: at + 12000]
-        for name, patterns in rules:
-            if name not in marks and any(p.search(sample) for p in patterns):
+        for name, patterns, groups in rules:
+            if name not in marks and (any(p.search(sample) for p in patterns)
+                                      or (groups and grouped_hits(sample, groups))):
                 marks.append(name)
         for title, pattern in TOPIC_PATTERNS.items():
             if re.search(pattern, sample) and title not in marks:

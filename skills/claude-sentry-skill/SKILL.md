@@ -3,7 +3,7 @@ name: claude-sentry-skill
 description: 依据 Anthropic 公开政策与当前可见信号，解释 Claude 对话内容、地区合规及环境变化的封号前提醒；只标记和提示，不做评分、封号预测或申诉。
 ---
 
-# Claude Sentry Skill v0.9.0 — Claude 通用 Skill
+# Claude Sentry Skill v0.9.1 — Claude 通用 Skill
 
 ## 使用方式
 本目录可以独立作为 Claude Skill 发布，也可由 Claude Code Plugin 加载。独立使用只依据当前 Claude 可见内容作解释；不会执行电脑上的 Hooks、自动查询出口 IP 或读取其他会话。用户明确调用时进行说明，或由 Claude 在判断相关时加载；不保证每轮调用。
@@ -36,6 +36,8 @@ description: 依据 Anthropic 公开政策与当前可见信号，解释 Claude 
 
 反诈识别、预防和举报等普通科普不因诈骗关键词本身触发提醒。封禁规则只针对请求绕过或规避账号封禁的操作意图；一般原因、合规预防和申诉讨论不因封号词汇触发。同一消息中另有操作请求时仍需分别判断。
 
+Hook 的 `signal_groups` 是局部语句内的行为与全部目标／用途线索组合匹配，不是语义意图理解。引用、否定、授权演练和隐晦表达仍可能误报或漏报；独立 Skill 应结合实际可见上下文解释，不把规则命中当作事实判定。
+
 ## 规则三：地区合规信号（统一规则）
 名称：`Unsupported Region Risk`。
 - 按用户许可观察**运行 Hook 的环境**的出口 IP、国家代码、设备时区、以及实际可见的官方地区限制提示。
@@ -66,7 +68,7 @@ description: 依据 Anthropic 公开政策与当前可见信号，解释 Claude 
 - 本项目**只提醒，不暂停、不拦截、不要求确认、不改写消息**；检测失败时直接放行。
 
 ## 参考文件
-- `references/context_rules.json` — Plugin 和独立 Skill 共用的 35 条中性内容规则；不是违规结论。
+- `references/context_rules.json` — Plugin 和独立 Skill 共用的 36 条中性内容规则；不是违规结论。
 - `references/supported_regions.json` — 共用的离线地区快照，核对其日期；独立 Skill 不因此获得 IP 查询能力。
 - `references/POLICY_INDEX.json` — 政策领域索引，核对政策的生效时间。
 - `references/SCENARIOS.json` — 典型场景，不是内部敏感词清单。

@@ -10,7 +10,7 @@
 **让 Claude 专注回答，让哨兵轻声提醒。**
 
 <p>
-  <a href="https://github.com/alvin20062006-beep/Claude-Sentry-Skill"><img src="https://img.shields.io/badge/version-0.9.0-C56543?style=flat-square" alt="Version 0.9.0"></a>
+  <a href="https://github.com/alvin20062006-beep/Claude-Sentry-Skill"><img src="https://img.shields.io/badge/version-0.9.1-C56543?style=flat-square" alt="Version 0.9.1"></a>
   <a href="#quick-start"><img src="https://img.shields.io/badge/Claude_Code-2.1.141%2B-292724?style=flat-square" alt="Claude Code 2.1.141+"></a>
   <a href="#quick-start"><img src="https://img.shields.io/badge/Python-3.9%2B-427568?style=flat-square" alt="Python 3.9+"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-84735A?style=flat-square" alt="MIT license"></a>
@@ -82,7 +82,7 @@ Restart Claude Code after installation. Do not also load the same plugin with `-
 
 ### Content detection scope
 
-Fraud prevention questions such as “How do I recognize scam calls?” do not trigger a content notice by themselves. Ban notices target requests for operational evasion (for example, “Write a script to bypass an account ban”), not general reasons, prevention, or appeals. An educational phrase does not exempt another actionable request in the same message. Hooks still use local regular expressions, so false positives and missed paraphrases remain possible; other existing topic notices are unchanged. Visible client restriction notices are handled separately.
+Fraud prevention questions such as “How do I recognize scam calls?” do not trigger a content notice by themselves. Ban notices target requests for operational evasion (for example, “Write a script to bypass an account ban”), not general reasons, prevention, or appeals. An educational phrase does not exempt another actionable request in the same message. Hooks use regexes and local combinations of action, target, and purpose—not semantic intent understanding. Examples include a fake bank login page plus credential collection, forgery plus identity documents, and a call script plus deception plus money transfer. Evidence is not combined across sentence boundaries. Quotes, negation, authorized exercises, and unlisted paraphrases can still be misclassified; other existing topic notices are unchanged. Visible client restriction notices are handled separately.
 
 ### Optional: enable outbound IP notices
 
@@ -121,7 +121,7 @@ Enabling lookups contacts `https://ipwho.is/`. The service sees the outbound IP 
 Use [`skills/claude-sentry-skill/`](skills/claude-sentry-skill/) independently of Claude Code. Export an upload package:
 
 ```bash
-python tools/package.py --skill ../Claude-Sentry-Skill-standalone-v0.9.0.zip
+python tools/package.py --skill ../Claude-Sentry-Skill-standalone-v0.9.1.zip
 ```
 
 Upload and enable it in a Claude interface that supports custom Skills. You can invoke it with **“Use Claude Sentry to explain this visible notice.”** Disable or remove it to stop using it. The full repository ZIP is not the standalone Skill upload package.
@@ -183,7 +183,7 @@ No. They are dated reference snapshots. Check their effective dates; do not trea
 
 ## ✓ Verification status
 
-**v0.9.0: 55 automated tests passed on cloud Linux; Claude Code 2.1.316 plugin and marketplace validation passed without warnings; local persistent installation passed with an isolated configuration. Windows was not retested for this change.**
+**v0.9.1: 63 automated tests passed on cloud Linux; Claude Code 2.1.316 plugin and marketplace validation passed without warnings; local persistent installation passed with an isolated configuration. Windows was not retested for this change.**
 
 Full client interactions, actual system notification delivery, Linux/macOS compatibility, and the standalone Skill upload experience still need further validation. Unverified behavior is not presented as complete.
 
@@ -192,7 +192,7 @@ Full client interactions, actual system notification delivery, Linux/macOS compa
 python -X utf8 -B -m unittest discover -s tests -v
 
 # Export the complete project
-python tools/package.py --full ../Claude-Sentry-Skill-v0.9.0-full.zip
+python tools/package.py --full ../Claude-Sentry-Skill-v0.9.1-full.zip
 ```
 
 ---

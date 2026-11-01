@@ -47,7 +47,7 @@ class Packaging(unittest.TestCase):
 
     def test_skill_references_and_manifest_version(self):
         manifest = json.loads((ROOT / '.claude-plugin/plugin.json').read_text(encoding='utf-8'))
-        self.assertEqual('0.9.0', manifest['version'])
+        self.assertEqual('0.9.1', manifest['version'])
         skill = ROOT / 'skills/claude-sentry-skill'
         text = (skill / 'SKILL.md').read_text(encoding='utf-8')
         self.assertTrue(text.startswith('---\nname: claude-sentry-skill\n'))

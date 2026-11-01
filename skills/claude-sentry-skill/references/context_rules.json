@@ -231,27 +231,107 @@
         "(?:帮我|写|生成|批量|write|generate|create).{0,25}(?:钓鱼短信|诈骗话术|冒充银行客服骗|phishing messages|scam script|fraudulent bank messages)"
       ],
       "note": "包含一个具体可能违反公开政策的行为描述，仍须核实授权、同意和用途；不是官方已标记。",
-      "clarify": "可以改为反欺诈识别、合规营销或真实身份披露。"
+      "clarify": "可以改为反欺诈识别、合规营销或真实身份披露。",
+      "signal_groups": [
+        {
+          "action": "(?:做|搭建|制作|建立|生成|开发|克隆|仿造|仿冒|复制|写|设计)|\\b(?:make|build|create|clone|design|write)\\b",
+          "all_of": [
+            "(?:诈骗|欺诈|钓鱼)|\\b(?:scam|fraud|phishing)\\b",
+            "(?:话术|对话|脚本|短信|邮件|电话)|\\b(?:script|messages?|emails?|calls?)\\b"
+          ]
+        },
+        {
+          "action": "(?:做|搭建|制作|建立|生成|开发|克隆|仿造|仿冒|复制|写|设计)|\\b(?:make|build|create|clone|design|write)\\b",
+          "all_of": [
+            "(?:话术|对话|短信|邮件|电话)|\\b(?:script|messages?|emails?|calls?)\\b",
+            "(?:骗|诱骗|冒充|假冒)|\\b(?:trick|deceive|impersonat\\w*)\\b",
+            "(?:转账|汇款|打钱|付款|钱财|密码|验证码)|\\b(?:money|transfer|payment|password|OTP)\\b"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "credential_phishing_site",
+      "category": "fraud",
+      "title": "制作仿冒登录页面或骗取凭据",
+      "patterns": [],
+      "signal_groups": [
+        {
+          "action": "(?:做|搭建|制作|建立|生成|开发|克隆|仿造|仿冒|复制|写|设计)|\\b(?:make|build|create|clone|design|write)\\b",
+          "all_of": [
+            "(?:银行|网银|支付|登录|登陆|登入).{0,16}(?:网站|网页|页面|界面)|(?:网站|网页|页面).{0,16}(?:银行|网银|登录)|\\b(?:bank|banking|login|sign.in).{0,24}(?:site|page|portal)\\b",
+            "(?:假|仿冒|冒充|伪装|克隆|仿造)|\\b(?:fake|spoof|clone|impersonat\\w*)\\b",
+            "(?:账号密码|帐号密码|密码|验证码|凭据|登录信息|登录资料|口令)|\\b(?:passwords?|credentials?|login details|verification codes?|OTP)\\b",
+            "(?:骗|诱骗|套取|窃取|盗取|偷|收集|获取)|\\b(?:steal|harvest|collect|capture|trick)\\b"
+          ]
+        },
+        {
+          "action": "(?:帮我|教我|怎么|如何|怎样|给我)|\\b(?:help me|how to|how can I|show me)\\b",
+          "all_of": [
+            "(?:冒充|假冒|伪装)|\\b(?:impersonate|pretend)\\b",
+            "(?:银行|客服|工作人员)|\\b(?:bank|support|staff)\\b",
+            "(?:账号密码|帐号密码|密码|验证码|凭据|登录信息|登录资料|口令)|\\b(?:passwords?|credentials?|login details|verification codes?|OTP)\\b",
+            "(?:骗|诱骗|套取|窃取|盗取|偷|收集|获取)|\\b(?:steal|harvest|collect|capture|trick)\\b"
+          ]
+        },
+        {
+          "action": "(?:做|搭建|制作|建立|生成|开发|克隆|仿造|仿冒|复制|写|设计)|\\b(?:make|build|create|clone|design|write)\\b",
+          "all_of": [
+            "(?:银行|网银|支付|登录|登陆|登入).{0,16}(?:网站|网页|页面|界面)|(?:网站|网页|页面).{0,16}(?:银行|网银|登录)|\\b(?:bank|banking|login|sign.in).{0,24}(?:site|page|portal)\\b",
+            "(?:账号密码|帐号密码|密码|验证码|凭据|登录信息|登录资料|口令)|\\b(?:passwords?|credentials?|login details|verification codes?|OTP)\\b",
+            "(?:骗|诱骗|套取|窃取|盗取|偷)|\\b(?:steal|trick)\\b"
+          ]
+        }
+      ],
+      "note": "同一局部语句包含制作或求助行为、仿冒目标及骗取凭据等文字线索；这是规则匹配，不是语义意图判定。",
+      "clarify": "可以讨论反诈识别或授权演练；需结合真实用途核实，不代表官方违规判定。"
     },
     {
       "id": "fake_document",
       "category": "fraud",
       "title": "伪造法律或经济文件",
-      "patterns": [
-        "(?:帮我|制作|伪造|生成|create|forge|make).{0,24}(?:假身份证|虚假工资单|伪造医生证明|fake ID|fake pay stub|fake medical certificate).{0,18}(?:骗|瞒|过审|欺|approval|deceive)?"
-      ],
+      "patterns": [],
       "note": "包含一个具体可能违反公开政策的行为描述，仍须核实授权、同意和用途；不是官方已标记。",
-      "clarify": "可以改为反欺诈识别、合规营销或真实身份披露。"
+      "clarify": "可以改为反欺诈识别、合规营销或真实身份披露。",
+      "signal_groups": [
+        {
+          "action": "(?:伪造|造假|假造)|\\b(?:forge|counterfeit|falsify)\\b",
+          "all_of": [
+            "(?:证件|身份证|护照|驾照|工资单|收入证明|医生证明|病假条|银行流水)|\\b(?:ID|passport|license|pay stub|medical certificate|bank statement)\\b"
+          ]
+        },
+        {
+          "action": "(?:做|搭建|制作|建立|生成|开发|克隆|仿造|仿冒|复制|写|设计)|\\b(?:make|build|create|clone|design|write)\\b",
+          "all_of": [
+            "(?:假|虚假|伪造)(?:的)?(?:证件|身份证|护照|驾照|工资单|收入证明|医生证明|病假条)|\\b(?:fake|forged)\\s+(?:ID|passport|license|pay stub|medical certificate)\\b"
+          ]
+        }
+      ]
     },
     {
       "id": "romance_scam",
       "category": "fraud",
       "title": "骗取钱财的假情感关系",
-      "patterns": [
-        "(?:帮我|如何|制作|how to|create).{0,27}(?:假恋爱机器人|约会诈骗|假交友骗钱|romance scam|fake dating persona).{0,18}(?:骗|敛财|收钱|solicit money|payment)?"
-      ],
+      "patterns": [],
       "note": "包含一个具体可能违反公开政策的行为描述，仍须核实授权、同意和用途；不是官方已标记。",
-      "clarify": "可以改为反欺诈识别、合规营销或真实身份披露。"
+      "clarify": "可以改为反欺诈识别、合规营销或真实身份披露。",
+      "signal_groups": [
+        {
+          "action": "(?:做|搭建|制作|建立|生成|开发|克隆|仿造|仿冒|复制|写|设计)|\\b(?:make|build|create|clone|design|write)\\b|(?:帮我|教我|怎么|如何|怎样|给我)|\\b(?:help me|how to|how can I|show me)\\b",
+          "all_of": [
+            "(?:假恋爱|约会诈骗|假交友|恋爱诈骗)|\\b(?:romance scam|fake dating persona)\\b",
+            "(?:骗|敛财|收钱)|\\b(?:scam|solicit money|payment)\\b"
+          ]
+        },
+        {
+          "action": "(?:帮我|教我|怎么|如何|怎样|给我)|\\b(?:help me|how to|how can I|show me)\\b",
+          "all_of": [
+            "(?:假装|冒充|伪装|假扮)|\\b(?:pretend|impersonate|fake)\\b",
+            "(?:恋爱|交友|男友|女友|男朋友|女朋友)|\\b(?:dating|boyfriend|girlfriend|romantic)\\b",
+            "(?:骗|诱骗|哄).{0,24}(?:钱|转账|汇款)|\\b(?:trick|deceive).{0,40}(?:money|transfer)\\b"
+          ]
+        }
+      ]
     },
     {
       "id": "spam",
@@ -357,5 +437,6 @@
       "note": "仅匹配请求规避账号封禁的操作意图；一般原因、预防与申诉讨论不因封号词汇触发。不是官方违规判定。",
       "clarify": "可以解释公开条款；不提供绕过封禁的方法，也不预测账号状态。"
     }
-  ]
+  ],
+  "matching_note": "patterns 为正则备选；signal_groups 为组合备选，每组 action 与全部 all_of 在局部语句中同时命中。仅为启发式线索，不具备完整语义、否定、引用或授权理解能力。"
 }

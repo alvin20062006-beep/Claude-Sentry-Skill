@@ -1,6 +1,6 @@
 {
   "name": "sentry-notice",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Claude Sentry Skill（Claude 哨兵）：仅提醒、不阻断、不评分；包含可独立发布的 Claude 通用 Skill。",
   "repository": "https://github.com/alvin20062006-beep/Claude-Sentry-Skill",
   "author": {
