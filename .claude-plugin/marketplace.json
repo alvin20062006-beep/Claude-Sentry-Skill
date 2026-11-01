@@ -1,0 +1,16 @@
+{
+  "name": "sentry-notice-marketplace",
+  "owner": {
+    "name": "alvin20062006-beep"
+  },
+  "plugins": [
+    {
+      "name": "sentry-notice",
+      "source": "./",
+      "description": "Transparent local notices for Claude Code."
+    }
+  ],
+  "metadata": {
+    "description": "Local, non-blocking notices for Claude Code."
+  }
+}

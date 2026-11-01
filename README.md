@@ -4,11 +4,13 @@
 
 <br>
 
+<img src="docs/assets/sentry.svg" alt="Sentry Notice icon" width="64" height="64">
+
 **让 Claude 专注回答，让哨兵轻声提醒。**<br>
 **Your conversation comes first. A heads-up when it matters.**
 
 <p>
-  <a href="https://github.com/alvin20062006-beep/Claude-Sentry-Skill"><img src="https://img.shields.io/badge/version-0.8.2-C56543?style=flat-square" alt="Version 0.8.2"></a>
+  <a href="https://github.com/alvin20062006-beep/Claude-Sentry-Skill"><img src="https://img.shields.io/badge/version-0.9.0-C56543?style=flat-square" alt="Version 0.9.0"></a>
   <a href="#quick-start"><img src="https://img.shields.io/badge/Claude_Code-2.1.141%2B-292724?style=flat-square" alt="Claude Code 2.1.141+"></a>
   <a href="#quick-start"><img src="https://img.shields.io/badge/Python-3.9%2B-427568?style=flat-square" alt="Python 3.9+"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-84735A?style=flat-square" alt="MIT license"></a>
@@ -67,6 +69,19 @@ claude --plugin-dir .
 
 这是临时加载方式；退出后，下次启动时省略 `--plugin-dir` 即停止加载。避免重复注册同一套 Hooks。
 
+### 持久安装
+
+```bash
+claude plugin marketplace add alvin20062006-beep/Claude-Sentry-Skill
+claude plugin install sentry-notice@sentry-notice-marketplace
+```
+
+安装后重启 Claude Code，不要再用 `--plugin-dir` 重复加载。卸载命令：`claude plugin uninstall sentry-notice@sentry-notice-marketplace`。以上命令需要仓库已包含本次新增的 marketplace 配置。
+
+### 内容提醒的范围
+
+“怎么识别诈骗电话？”等反诈科普问题不因诈骗词汇本身触发内容提醒。封禁相关规则针对“帮我写一个绕过封号的脚本”等操作请求；“Claude 为什么会封号”、合规预防和申诉的一般讨论不因封号词汇触发。同一消息中的科普表达不会豁免另一项操作请求。Hook 仍使用本地正则规则，可能误报或漏掉改写表达；其他已有主题提醒保持原有范围。客户端实际显示的限制通知单独处理。
+
 ### 可选：开启出口 IP 变化提醒
 
 **默认不查询网络。** 需要时，在启动 Claude 之前设置：
@@ -104,7 +119,7 @@ claude --plugin-dir .
 不使用 Claude Code 时，可独立使用 [`skills/claude-sentry-skill/`](skills/claude-sentry-skill/)。导出上传包：
 
 ```bash
-python tools/package.py --skill ../Claude-Sentry-Skill-standalone-v0.8.2.zip
+python tools/package.py --skill ../Claude-Sentry-Skill-standalone-v0.9.0.zip
 ```
 
 在支持自定义 Skills 的 Claude 界面上传并启用，可主动调用：**“请用 Claude 哨兵解释这条可见通知。”** 禁用或移除即可停止使用；完整仓库 ZIP 不作为独立 Skill 上传包。
@@ -166,7 +181,7 @@ python hooks/transparency.py --notices
 
 ## ✓ 当前验证状态
 
-**v0.8.2：48 项自动化测试通过，Claude Code 插件校验通过，已完成 Windows 基础验证。**
+**v0.9.0：55 项自动化测试通过（云端 Linux），Claude Code 2.1.316 插件与 marketplace 校验无警告，隔离配置下本地持久安装通过。本次未复测 Windows。**
 
 完整客户端交互、系统弹窗实际送达、Linux/macOS 兼容性及独立 Skill 上传体验仍待补充验证。未经实际验证的行为不作为完成承诺。
 
@@ -175,7 +190,7 @@ python hooks/transparency.py --notices
 python -X utf8 -B -m unittest discover -s tests -v
 
 # 导出完整项目
-python tools/package.py --full ../Claude-Sentry-Skill-v0.8.2-full.zip
+python tools/package.py --full ../Claude-Sentry-Skill-v0.9.0-full.zip
 ```
 
 ---

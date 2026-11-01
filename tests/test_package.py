@@ -22,6 +22,8 @@ class Packaging(unittest.TestCase):
                 names = set(z.namelist())
                 self.assertIn(prefix + '.claude-plugin/plugin.json', names)
                 self.assertIn(prefix + 'LICENSE', names)
+                self.assertIn(prefix + '.claude-plugin/marketplace.json', names)
+                self.assertIn(prefix + '.claude-plugin/icon.png', names)
                 self.assertIn(prefix + 'README.en.md', names)
                 self.assertIn(prefix + 'docs/index.html', names)
                 self.assertIn(prefix + 'docs/assets/banner.svg', names)
@@ -45,7 +47,7 @@ class Packaging(unittest.TestCase):
 
     def test_skill_references_and_manifest_version(self):
         manifest = json.loads((ROOT / '.claude-plugin/plugin.json').read_text(encoding='utf-8'))
-        self.assertEqual('0.8.2', manifest['version'])
+        self.assertEqual('0.9.0', manifest['version'])
         skill = ROOT / 'skills/claude-sentry-skill'
         text = (skill / 'SKILL.md').read_text(encoding='utf-8')
         self.assertTrue(text.startswith('---\nname: claude-sentry-skill\n'))

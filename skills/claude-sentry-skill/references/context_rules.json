@@ -343,6 +343,19 @@
       ],
       "note": "仅依据用户自述提示地区政策；无法核实所在地、账号状态或后台标记。不以国籍为依据。",
       "clarify": "如确实在该地区使用Claude，请核对官方Supported Regions Policy。本地提醒不表示已被后台标记或会被封号。"
+    },
+    {
+      "id": "ban_evasion",
+      "category": "platform_abuse",
+      "title": "请求规避账号封禁",
+      "patterns": [
+        "(?:帮我|教我|给我|如何|怎么|怎样)(?:写|编写|生成|制作|开发|实现|一个|一段|一份|可以|才能|能|的|脚本|程序|工具|方法|步骤|代码|自动|批量|来|去|用于|用来|继续|操作|[ \\t]){0,16}(?:绕过|规避|逃避)(?:账号|账户|平台|Claude|的|[ \\t]){0,6}(?:封号|封禁|账号被封|账户被封)",
+        "(?:写|编写|生成|制作|开发)(?:一个|一段|一份|用于|用来|可以|能|[ \\t]){0,8}(?:绕过|规避|逃避)(?:账号|账户|平台|Claude|的|[ \\t]){0,6}(?:封号|封禁)(?:的)?(?:脚本|程序|工具|代码)",
+        "\\b(?:how (?:to|do I|can I)|help me|show me how to)\\s+(?:bypass|evade|circumvent)\\s+(?:(?:an?|the|my|account|platform)\\s+){0,4}(?:bans?|suspensions?)\\b",
+        "\\b(?:write|build|create)\\s+(?:\\w+\\s+){0,5}(?:script|code|tool)\\s+to\\s+(?:bypass|evade|circumvent)\\s+(?:(?:an?|the|my|account|platform)\\s+){0,4}(?:bans?|suspensions?)\\b"
+      ],
+      "note": "仅匹配请求规避账号封禁的操作意图；一般原因、预防与申诉讨论不因封号词汇触发。不是官方违规判定。",
+      "clarify": "可以解释公开条款；不提供绕过封禁的方法，也不预测账号状态。"
     }
   ]
 }

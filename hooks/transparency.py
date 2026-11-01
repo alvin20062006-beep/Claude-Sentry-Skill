@@ -25,7 +25,6 @@ REGIONS_FILE = REFERENCES / 'supported_regions.json'
 
 TOPIC_PATTERNS = {
     '网络安全政策主题': r'(?i)(?:勒索软件|恶意软件|木马|未授权入侵|窃取密码|钓鱼网站|ransomware|malware|credential theft|phishing)',
-    '欺诈政策主题': r'(?i)(?:诈骗|伪造证件|恋爱诈骗|fraud|scam|fake identity)',
     '暴力与武器政策主题': r'(?i)(?:爆炸装置|制作炸弹|恐怖袭击|bioweapon|explosive device)',
 }
 REFUSAL = re.compile(r"(?i)(?:I (?:cannot|can't|won't) (?:help (?:you )?(?:with|to)|provide|assist with)|(?:抱歉|对不起).{0,20}(?:不能|无法).{0,12}(?:协助|提供|制作|执行|生成))")
@@ -53,10 +52,26 @@ def compiled_rules() -> tuple:
     return tuple(rules)
 
 
+FRAUD_EDUCATION = re.compile(
+    r'(?i)(?:识别|辨别|辨识|防范|预防|防止|举报|报告|防御|检测|识破)'
+    r'(?:常见的?|潜在的?|可能的?|电话|网络|电信|恋爱|约会|银行|这些|这类|此类|的)*'
+    r'(?:诈骗|欺诈|钓鱼)(?:电话|短信|邮件|话术|网站)?'
+    r'|\b(?:recogniz(?:e|ing)|identify(?:ing)?|detect(?:ing)?|prevent(?:ing)?|report(?:ing)?|avoid(?:ing)?)'
+    r'\s+(?:(?:a|the|common|potential|phone|online|romance|bank)\s+)*'
+    r'(?:scams?|fraud|phishing)(?:\s+(?:calls?|messages?|emails?|scripts?))?\b'
+)
+
+
+def content_signal_text(text: str) -> str:
+    """Mask narrow prevention phrases; keep other requests in the same message."""
+    return FRAUD_EDUCATION.sub(lambda match: ' ' * len(match.group()), text)
+
+
 def regex_hits(text: str) -> list[str]:
     """Read the *entire* text in bounded overlapping windows, not only its prefix."""
     if not isinstance(text, str):
         return []
+    text = content_signal_text(text)
     rules = compiled_rules()
     marks = []
     # O(ceil(n/12000) * rule_count); cap a single window, not the complete input.
@@ -145,9 +160,10 @@ SENSITIVE = re.compile(r'(?i)(钓鱼|诈骗|验证码|账号密码|木马|勒索
 def contextual_marks(prompt: str, context: dict, prompt_hits=None) -> list[str]:
     """Correlate split requests; never claim to infer an unobservable hidden intent."""
     if not isinstance(prompt, str): return []
+    prompt = content_signal_text(prompt)
     turns = context.get('recent', [])
     previous_user = [t.get('text', '') for t in turns if t.get('role') == 'user'][-3:]
-    prior = '\n'.join(previous_user)
+    prior = content_signal_text('\n'.join(previous_user))
     combined = (prior[-8000:] + '\n' + prompt) if prior else prompt
     if prompt_hits is None:
         prompt_hits = regex_hits(prompt)
