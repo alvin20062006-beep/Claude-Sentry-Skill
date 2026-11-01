@@ -1,0 +1,190 @@
+{
+  "version": "0.3.0",
+  "note": "索引生效日为 2026-11-12，截至 2026-11-01 尚未生效，仅供参考，不得据此认定当前行为违规；解释条款前核对现行版本。",
+  "policy_effective": "2026-11-12",
+  "universal_categories": [
+    {
+      "id": "illegal_activity",
+      "title": "违法行为与受监管活动",
+      "illustrative_risks": "非法药物交易、人口贩运、侵犯知识产权、其他违法用途",
+      "benign_context": "法律教育、合法合规咨询",
+      "evidence": "A"
+    },
+    {
+      "id": "critical_infrastructure",
+      "title": "关键基础设施",
+      "illustrative_risks": "破坏电网、水处理、医院、通信、交通，非法接触关键系统",
+      "benign_context": "运营维护、风险评估及授权审计",
+      "evidence": "A"
+    },
+    {
+      "id": "cyber",
+      "title": "网络安全与未经授权访问",
+      "illustrative_risks": "非法入侵、恶意软件、窃取凭据、恶意流量、绕过认证",
+      "benign_context": "获授权的渗透测试、防御研究、网络安全教学",
+      "evidence": "A"
+    },
+    {
+      "id": "weapons",
+      "title": "武器、爆炸物与CBRNE",
+      "illustrative_risks": "设计武器、武器控制或制导、危险病原体武器化、爆炸装置",
+      "benign_context": "历史、公共安全与非操作性科学教育",
+      "evidence": "A"
+    },
+    {
+      "id": "violence_hate",
+      "title": "暴力、恐怖主义与仇恨",
+      "illustrative_risks": "策划伤害、暴恐招募、煽动仇恨或歧视",
+      "benign_context": "历史研究、新闻事实核查、受害者保护",
+      "evidence": "A"
+    },
+    {
+      "id": "privacy_identity",
+      "title": "隐私、身份与非授权数据",
+      "illustrative_risks": "盗取隐私数据、未经同意跟踪、滥用敏感身份信息",
+      "benign_context": "本人数据权利、合规隐私设计",
+      "evidence": "A"
+    },
+    {
+      "id": "child_safety",
+      "title": "未成年人保护",
+      "illustrative_risks": "儿童性剥削、诱骗、虐待及相关协助",
+      "benign_context": "保护儿童、安全教育、举报和支持",
+      "evidence": "A"
+    },
+    {
+      "id": "psychological_harm",
+      "title": "自伤、骚扰与心理伤害",
+      "illustrative_risks": "鼓励自伤、非自愿私密影像、持续恐吓、骚扰",
+      "benign_context": "危机支持、心理健康教育、反骚扰",
+      "evidence": "A"
+    },
+    {
+      "id": "disinformation",
+      "title": "虚假信息与冒充",
+      "illustrative_risks": "有意制作误导性报道、伪造事实、冒充真人或机构",
+      "benign_context": "事实核查、公开标注的讽刺与虚构",
+      "evidence": "A"
+    },
+    {
+      "id": "deceptive_campaigns",
+      "title": "伪装活动与虚假声量",
+      "illustrative_risks": "大规模假账号、虚假评论、隐瞒赞助、误导性舆论操作",
+      "benign_context": "公开署名和真实身份的宣传",
+      "evidence": "A"
+    },
+    {
+      "id": "democracy",
+      "title": "选举程序与民主参与",
+      "illustrative_risks": "冒充选举机构、虚假投票说明、欺骗性压制投票",
+      "benign_context": "非欺骗性公民教育、合法信息告知",
+      "evidence": "A"
+    },
+    {
+      "id": "surveillance",
+      "title": "监控、审查与执法决策",
+      "illustrative_risks": "未获同意的人身跟踪、识别匿名者、生成监控档案、AI代替执法决策",
+      "benign_context": "获同意的分析、合法研究、新闻报道",
+      "evidence": "A"
+    },
+    {
+      "id": "fraud",
+      "title": "欺诈、诈骗与剥削",
+      "illustrative_risks": "钓鱼、骗取资金、伪造证件、欺诈客服、批量垃圾信息",
+      "benign_context": "反诈培训、消费者保护",
+      "evidence": "A"
+    },
+    {
+      "id": "platform_abuse",
+      "title": "平台滥用与绕过限制",
+      "illustrative_risks": "恶意多账号、绕过封禁、未经许可的模型蒸馏、滥用账号权限",
+      "benign_context": "正常多设备协作、合规API使用",
+      "evidence": "A"
+    },
+    {
+      "id": "explicit_sex",
+      "title": "成人露骨性内容",
+      "illustrative_risks": "露骨性行为描写、色情角色扮演等受限内容",
+      "benign_context": "医学教育、性健康科普、关系沟通",
+      "evidence": "A"
+    }
+  ],
+  "high_risk_recommendation_domains": [
+    {
+      "id": "legal",
+      "title": "法律"
+    },
+    {
+      "id": "medical",
+      "title": "医疗及心理健康"
+    },
+    {
+      "id": "finance",
+      "title": "投资与税务"
+    },
+    {
+      "id": "credit",
+      "title": "贷款与征信"
+    },
+    {
+      "id": "insurance",
+      "title": "保险"
+    },
+    {
+      "id": "housing",
+      "title": "住房"
+    },
+    {
+      "id": "employment",
+      "title": "就业"
+    },
+    {
+      "id": "education",
+      "title": "教育与执照"
+    },
+    {
+      "id": "healthcare_access",
+      "title": "医疗资源获得"
+    },
+    {
+      "id": "public_benefits",
+      "title": "公共福利"
+    },
+    {
+      "id": "legal_status",
+      "title": "移民与法律身份"
+    }
+  ],
+  "high_risk_physical_actions": [
+    "自主移动设备",
+    "可能伤人的机械执行",
+    "危险能源或物质控制",
+    "直接作用于人体的设备",
+    "安全系统控制",
+    "高风险工业过程"
+  ],
+  "additional_use_cases": [
+    "面向消费者的AI身份披露",
+    "面向未成年人的产品额外要求",
+    "Agent工具行为合规",
+    "软件目录额外规范"
+  ],
+  "assessment_dimensions": [
+    "实际请求意图",
+    "被协助的具体行为",
+    "用户拥有的权限与同意",
+    "是否存在可适用的例外",
+    "是否要求执行、批量化或自动化",
+    "对话中能看到的拒绝与正式通知"
+  ],
+  "not_assessed": [
+    "VPN",
+    "IP",
+    "地理位置",
+    "网络代理",
+    "设备指纹",
+    "Anthropic内部flagged/priority/评分/登录风控"
+  ],
+  "interpretation": "正常讨论、引用政策、翻译违规示例都不能单独推断会被标记。",
+  "status": "future_policy_reference_only"
+}

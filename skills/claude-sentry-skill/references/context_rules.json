@@ -1,0 +1,348 @@
+{
+  "version": "0.6.0",
+  "updated": "2026-11-01",
+  "policy_note": "中性主题匹配规则，仅用于提醒，不构成违规判定或官方内部标记。",
+  "rules": [
+    {
+      "id": "unauth_access",
+      "category": "cyber",
+      "title": "未经授权访问第三方系统",
+      "patterns": [
+        "(?:帮我|教我|如何|怎么|给我|write|show me|how to).{0,24}(?:入侵|黑进|攻破|hack into|break into).{0,22}(?:别人的|他人的|未经授权|第三方|someone else|without permission|unaut[\\w]*|公司内部|陌生人)"
+      ],
+      "note": "包含一个具体可能违反公开政策的行为描述，仍须核实授权、同意和用途；不是官方已标记。",
+      "clarify": "如为防御研究，请说明自己对目标系统的授权范围；只讨论合法测试或防护。"
+    },
+    {
+      "id": "credential_theft",
+      "category": "cyber",
+      "title": "盗取他人的凭据或会话",
+      "patterns": [
+        "(?:帮我|如何|怎么|给我|how to|write).{0,22}(?:偷|盗取|窃取|steal|exfiltrate|harvest).{0,20}(?:密码|令牌|cookie|凭据|password|token|credentials?)"
+      ],
+      "note": "包含一个具体可能违反公开政策的行为描述，仍须核实授权、同意和用途；不是官方已标记。",
+      "clarify": "如为防御研究，请说明自己对目标系统的授权范围；只讨论合法测试或防护。"
+    },
+    {
+      "id": "malware_build",
+      "category": "cyber",
+      "title": "直接协助制作恶意软件",
+      "patterns": [
+        "(?:帮我|写|制作|生成|开发|how to|build|write).{0,25}(?:勒索软件|窃密木马|恶意软件|ransomware|credential stealer|keylogger|malware).{0,25}(?:攻击|传播|部署|窃取|执行|payload|deploy|spread|steal)?"
+      ],
+      "note": "包含一个具体可能违反公开政策的行为描述，仍须核实授权、同意和用途；不是官方已标记。",
+      "clarify": "如为防御研究，请说明自己对目标系统的授权范围；只讨论合法测试或防护。"
+    },
+    {
+      "id": "network_dos",
+      "category": "cyber",
+      "title": "针对外部目标的拒绝服务",
+      "patterns": [
+        "(?:帮我|如何|教我|how to|write).{0,24}(?:打瘫|打挂|DDoS|拒绝服务).{0,16}(?:网站|对方|别人的|外部|target|server|site)"
+      ],
+      "note": "包含一个具体可能违反公开政策的行为描述，仍须核实授权、同意和用途；不是官方已标记。",
+      "clarify": "如为防御研究，请说明自己对目标系统的授权范围；只讨论合法测试或防护。"
+    },
+    {
+      "id": "critical_disruption",
+      "category": "critical_infrastructure",
+      "title": "关键基础设施破坏",
+      "patterns": [
+        "(?:如何|教我|帮我|how to|help me).{0,30}(?:瘫痪|破坏|关闭|攻击|disable|sabotage|disrupt).{0,16}(?:电网|医院系统|水处理|紧急通信|power grid|hospital system|water treatment)"
+      ],
+      "note": "包含一个具体可能违反公开政策的行为描述，仍须核实授权、同意和用途；不是官方已标记。",
+      "clarify": "请结合授权、当事人同意及真实用途理解政策。"
+    },
+    {
+      "id": "weapon_design",
+      "category": "weapons",
+      "title": "制作或改进具伤害能力的武器",
+      "patterns": [
+        "(?:教我|帮我|设计|制作|组装|how to|build|design).{0,25}(?:炸弹|爆炸装置|武器制导|火控系统|bomb|explosive device|weapon targeting|missile guidance)"
+      ],
+      "note": "包含一个具体可能违反公开政策的行为描述，仍须核实授权、同意和用途；不是官方已标记。",
+      "clarify": "可改为历史、法规与风险防护等非操作性讨论。"
+    },
+    {
+      "id": "bio_weaponization",
+      "category": "weapons",
+      "title": "生物或化学伤害能力增强",
+      "patterns": [
+        "(?:如何|帮我|教我|how to|help me).{0,32}(?:增强|提高|优化|increase|enhance).{0,24}(?:病原体的传播性|病原体的致死性|毒剂的杀伤力|pathogen lethality|biological agent transmissibility)"
+      ],
+      "note": "包含一个具体可能违反公开政策的行为描述，仍须核实授权、同意和用途；不是官方已标记。",
+      "clarify": "可改为历史、法规与风险防护等非操作性讨论。"
+    },
+    {
+      "id": "violent_planning",
+      "category": "violence_hate",
+      "title": "对现实对象的暴力实施计划",
+      "patterns": [
+        "(?:帮我|如何|教我|help me|how to).{0,30}(?:袭击|绑架|暗杀|kidnap|assassinate|attack).{0,16}(?:某人|某个|目标|person|individual|target)"
+      ],
+      "note": "包含一个具体可能违反公开政策的行为描述，仍须核实授权、同意和用途；不是官方已标记。",
+      "clarify": "请结合授权、当事人同意及真实用途理解政策。"
+    },
+    {
+      "id": "hate_campaign",
+      "category": "violence_hate",
+      "title": "组织仇恨或暴力煽动",
+      "patterns": [
+        "(?:帮我|制作|写|how to|write).{0,23}(?:煽动暴力|仇恨宣传|terrorist recruitment|violent extremist propaganda)"
+      ],
+      "note": "包含一个具体可能违反公开政策的行为描述，仍须核实授权、同意和用途；不是官方已标记。",
+      "clarify": "请结合授权、当事人同意及真实用途理解政策。"
+    },
+    {
+      "id": "doxxing",
+      "category": "privacy_identity",
+      "title": "非自愿披露/追踪个人信息",
+      "patterns": [
+        "(?:帮我|怎么|如何|查出|挖出|找出|find|reveal|track).{0,25}(?:匿名网友|匿名账号|私人住址|私密地址|private home address|anonymous user identity).{0,15}(?:骚扰|公开|泄露|曝光|harass|dox|publish|expose)?"
+      ],
+      "note": "包含一个具体可能违反公开政策的行为描述，仍须核实授权、同意和用途；不是官方已标记。",
+      "clarify": "如涉及私人资料，应先核实数据主体授权，并避免外泄敏感资料。"
+    },
+    {
+      "id": "secret_data",
+      "category": "privacy_identity",
+      "title": "未获授权获取敏感数据",
+      "patterns": [
+        "(?:帮我|如何|怎么|how to|help me).{0,24}(?:盗取|窃取|获取|steal|exfiltrate).{0,20}(?:客户隐私|他人病历|私人聊天|private medical records|customer personal data)"
+      ],
+      "note": "包含一个具体可能违反公开政策的行为描述，仍须核实授权、同意和用途；不是官方已标记。",
+      "clarify": "如涉及私人资料，应先核实数据主体授权，并避免外泄敏感资料。"
+    },
+    {
+      "id": "child_abuse",
+      "category": "child_safety",
+      "title": "诱骗或剥削未成年人",
+      "patterns": [
+        "(?:帮我|写|如何|教我|write|help me).{0,25}(?:诱骗未成年|儿童性剥削|child sexual exploitation|groom a minor|CSAM).{0,25}(?:内容|方法|话术|步骤|生成|script|method|material)?"
+      ],
+      "note": "包含一个具体可能违反公开政策的行为描述，仍须核实授权、同意和用途；不是官方已标记。",
+      "clarify": "可以帮助识别、预防和报告剥削行为，但不能提供促成伤害的内容。"
+    },
+    {
+      "id": "self_harm_methods",
+      "category": "psychological_harm",
+      "title": "涉及自伤方法的具体请求",
+      "patterns": [
+        "(?:如何|教我|how to|give me).{0,30}(?:自伤|自杀|self.harm|suicide).{0,20}(?:方法|步骤|技巧|instructions|method|steps)"
+      ],
+      "note": "当前描述可能涉及受限行为，但上下文不足；需询问实际用途、合法授权或人工审核。",
+      "clarify": "可以讨论求助、安全计划和支持资源，避免提供实施伤害的方法。"
+    },
+    {
+      "id": "ncii",
+      "category": "psychological_harm",
+      "title": "非自愿私密影像生成",
+      "patterns": [
+        "(?:帮我|生成|制作|create|generate).{0,26}(?:同事|某人|真人|ex|同学|real person).{0,26}(?:裸照|色情深伪|deepfake nudes|nonconsensual intimate)"
+      ],
+      "note": "包含一个具体可能违反公开政策的行为描述，仍须核实授权、同意和用途；不是官方已标记。",
+      "clarify": "可以讨论求助、安全计划和支持资源，避免提供实施伤害的方法。"
+    },
+    {
+      "id": "targeted_harassment",
+      "category": "psychological_harm",
+      "title": "针对特定人的骚扰活动",
+      "patterns": [
+        "(?:组织|帮我策划|写一套|coordinate|help me plan).{0,25}(?:网暴|骚扰|恐吓|harassment|intimidation campaign)"
+      ],
+      "note": "包含一个具体可能违反公开政策的行为描述，仍须核实授权、同意和用途；不是官方已标记。",
+      "clarify": "可以讨论求助、安全计划和支持资源，避免提供实施伤害的方法。"
+    },
+    {
+      "id": "fake_claims",
+      "category": "disinformation",
+      "title": "冒充权威编造事实",
+      "patterns": [
+        "(?:编造|伪造|捏造|fabricate|fake|forge).{0,26}(?:真实新闻|新闻报道|政府公告|医药研究结论|news report|government announcement|medical study).{0,10}(?:骗人|让人相信|误导|mislead|deceive)?"
+      ],
+      "note": "包含一个具体可能违反公开政策的行为描述，仍须核实授权、同意和用途；不是官方已标记。",
+      "clarify": "请结合授权、当事人同意及真实用途理解政策。"
+    },
+    {
+      "id": "fake_persona",
+      "category": "deceptive_campaigns",
+      "title": "虚假身份或不真实活动",
+      "patterns": [
+        "(?:帮我|如何|批量|制作|generate|create|build).{0,24}(?:假账号|水军账号|真人伪装账号|sockpuppet accounts|fake reviews|fake personas).{0,24}(?:营销|误导|刷|评论|发帖|推广|promote|reviews|posts)?"
+      ],
+      "note": "包含一个具体可能违反公开政策的行为描述，仍须核实授权、同意和用途；不是官方已标记。",
+      "clarify": "请结合授权、当事人同意及真实用途理解政策。"
+    },
+    {
+      "id": "hidden_sponsorship",
+      "category": "deceptive_campaigns",
+      "title": "掩盖内容赞助来源",
+      "patterns": [
+        "(?:帮我|怎样|怎么|how to|help me).{0,24}(?:隐瞒赞助商|隐藏出资方|伪装独立媒体|conceal sponsorship|disguise sponsored content)"
+      ],
+      "note": "包含一个具体可能违反公开政策的行为描述，仍须核实授权、同意和用途；不是官方已标记。",
+      "clarify": "请结合授权、当事人同意及真实用途理解政策。"
+    },
+    {
+      "id": "election_misinfo",
+      "category": "democracy",
+      "title": "错误投票信息或冒充选举机关",
+      "patterns": [
+        "(?:帮我|编造|生成|fabricate|generate).{0,25}(?:虚假投票|投票错误地点|假选举通知|false voting location|fake election notice)"
+      ],
+      "note": "包含一个具体可能违反公开政策的行为描述，仍须核实授权、同意和用途；不是官方已标记。",
+      "clarify": "请结合授权、当事人同意及真实用途理解政策。"
+    },
+    {
+      "id": "voter_suppression",
+      "category": "democracy",
+      "title": "欺骗性压制合法投票",
+      "patterns": [
+        "(?:帮我|怎样|如何|how to|help me).{0,25}(?:骗选民不投票|恐吓选民|disenfranchise voters|suppress votes through deception)"
+      ],
+      "note": "包含一个具体可能违反公开政策的行为描述，仍须核实授权、同意和用途；不是官方已标记。",
+      "clarify": "请结合授权、当事人同意及真实用途理解政策。"
+    },
+    {
+      "id": "surveillance",
+      "category": "surveillance",
+      "title": "未获同意的跟踪或画像",
+      "patterns": [
+        "(?:帮我|制作|开发|how to|build|create).{0,25}(?:未经同意跟踪|监控私人聊天|追踪前任|surveil people without consent|track an ex without consent)"
+      ],
+      "note": "包含一个具体可能违反公开政策的行为描述，仍须核实授权、同意和用途；不是官方已标记。",
+      "clarify": "请结合授权、当事人同意及真实用途理解政策。"
+    },
+    {
+      "id": "law_enforcement",
+      "category": "surveillance",
+      "title": "自动化执法或司法处罚决策",
+      "patterns": [
+        "(?:帮我|开发|设计|build|design).{0,25}(?:自动决定逮捕|自动决定谁该起诉|AI决定谁被抓|automated arrest decisions|AI sentencing recommendations)"
+      ],
+      "note": "当前描述可能涉及受限行为，但上下文不足；需询问实际用途、合法授权或人工审核。",
+      "clarify": "请结合授权、当事人同意及真实用途理解政策。"
+    },
+    {
+      "id": "phishing",
+      "category": "fraud",
+      "title": "直接制作诈骗或钓鱼话术",
+      "patterns": [
+        "(?:帮我|写|生成|批量|write|generate|create).{0,25}(?:钓鱼短信|诈骗话术|冒充银行客服骗|phishing messages|scam script|fraudulent bank messages)"
+      ],
+      "note": "包含一个具体可能违反公开政策的行为描述，仍须核实授权、同意和用途；不是官方已标记。",
+      "clarify": "可以改为反欺诈识别、合规营销或真实身份披露。"
+    },
+    {
+      "id": "fake_document",
+      "category": "fraud",
+      "title": "伪造法律或经济文件",
+      "patterns": [
+        "(?:帮我|制作|伪造|生成|create|forge|make).{0,24}(?:假身份证|虚假工资单|伪造医生证明|fake ID|fake pay stub|fake medical certificate).{0,18}(?:骗|瞒|过审|欺|approval|deceive)?"
+      ],
+      "note": "包含一个具体可能违反公开政策的行为描述，仍须核实授权、同意和用途；不是官方已标记。",
+      "clarify": "可以改为反欺诈识别、合规营销或真实身份披露。"
+    },
+    {
+      "id": "romance_scam",
+      "category": "fraud",
+      "title": "骗取钱财的假情感关系",
+      "patterns": [
+        "(?:帮我|如何|制作|how to|create).{0,27}(?:假恋爱机器人|约会诈骗|假交友骗钱|romance scam|fake dating persona).{0,18}(?:骗|敛财|收钱|solicit money|payment)?"
+      ],
+      "note": "包含一个具体可能违反公开政策的行为描述，仍须核实授权、同意和用途；不是官方已标记。",
+      "clarify": "可以改为反欺诈识别、合规营销或真实身份披露。"
+    },
+    {
+      "id": "spam",
+      "category": "fraud",
+      "title": "批量不请自来的信息",
+      "patterns": [
+        "(?:帮我|写|生成|create|generate).{0,24}(?:群发垃圾短信|垃圾邮件营销机器人|mass spam messages|unsolicited spam emails)"
+      ],
+      "note": "当前描述可能涉及受限行为，但上下文不足；需询问实际用途、合法授权或人工审核。",
+      "clarify": "可以改为反欺诈识别、合规营销或真实身份披露。"
+    },
+    {
+      "id": "distillation",
+      "category": "platform_abuse",
+      "title": "未经授权模型能力抽取",
+      "patterns": [
+        "(?:帮我|写|制作|build|write).{0,28}(?:未经授权模型蒸馏|提取隐藏推理|unlicensed model distillation|extract hidden reasoning traces)"
+      ],
+      "note": "当前描述可能涉及受限行为，但上下文不足；需询问实际用途、合法授权或人工审核。",
+      "clarify": "可以解释公开条款及其适用范围；不提供规避限制、申诉或账号恢复功能。"
+    },
+    {
+      "id": "jailbreak_harm",
+      "category": "platform_abuse",
+      "title": "为了有害内容规避模型安全限制",
+      "patterns": [
+        "(?:帮我|怎么|如何|how to|help me).{0,24}(?:绕过|规避|bypass|evade).{0,18}(?:安全过滤|安全审查|safety guardrails|moderation).{0,18}(?:做坏事|生成有害|harmful content|restricted instructions)?"
+      ],
+      "note": "当前描述可能涉及受限行为，但上下文不足；需询问实际用途、合法授权或人工审核。",
+      "clarify": "可以解释公开条款及其适用范围；不提供规避限制、申诉或账号恢复功能。"
+    },
+    {
+      "id": "explicit_request",
+      "category": "explicit_sex",
+      "title": "直接要求生成成人露骨性内容",
+      "patterns": [
+        "(?:帮我|写|生成|write|generate).{0,24}(?:露骨色情|成人色情性爱细节|explicit pornographic scene|erotic roleplay)"
+      ],
+      "note": "当前描述可能涉及受限行为，但上下文不足；需询问实际用途、合法授权或人工审核。",
+      "clarify": "请结合授权、当事人同意及真实用途理解政策。"
+    },
+    {
+      "id": "regulated_illegal",
+      "category": "illegal_activity",
+      "title": "明确要求促成非法交易",
+      "patterns": [
+        "(?:教我|帮我|如何|how to|help me).{0,22}(?:非法贩卖|违法销售|illegally sell|traffic in).{0,18}(?:管制药品|违禁品|controlled drugs|regulated substances)"
+      ],
+      "note": "包含一个具体可能违反公开政策的行为描述，仍须核实授权、同意和用途；不是官方已标记。",
+      "clarify": "请结合授权、当事人同意及真实用途理解政策。"
+    },
+    {
+      "id": "human_trafficking",
+      "category": "illegal_activity",
+      "title": "人口剥削与贩运",
+      "patterns": [
+        "(?:帮我|如何|how to|help me).{0,20}(?:贩卖人口|组织人口贩运|traffic people|human trafficking)"
+      ],
+      "note": "包含一个具体可能违反公开政策的行为描述，仍须核实授权、同意和用途；不是官方已标记。",
+      "clarify": "请结合授权、当事人同意及真实用途理解政策。"
+    },
+    {
+      "id": "high_stakes_decision",
+      "category": "high_risk",
+      "title": "面向个人的高风险决策自动化",
+      "patterns": [
+        "(?:让AI|用Claude|automate with AI|have AI).{0,24}(?:决定谁被录取|直接拒绝房贷|自动拒绝保险理赔|自动决定辞退|decide who gets hired|deny insurance claims)"
+      ],
+      "note": "当前描述可能涉及受限行为，但上下文不足；需询问实际用途、合法授权或人工审核。",
+      "clarify": "请结合授权、当事人同意及真实用途理解政策。"
+    },
+    {
+      "id": "unsafe_robot",
+      "category": "high_risk",
+      "title": "高影响物理设备的无人监管自动操作",
+      "patterns": [
+        "(?:让AI|让Claude|have AI).{0,24}(?:无人监管控制|直接控制无人机|直接注射药物|autonomously control a drone|administer drugs autonomously)"
+      ],
+      "note": "当前描述可能涉及受限行为，但上下文不足；需询问实际用途、合法授权或人工审核。",
+      "clarify": "请结合授权、当事人同意及真实用途理解政策。"
+    },
+    {
+      "id": "self_reported_unsupported_location_use",
+      "category": "supported_regions",
+      "title": "对话自述当前身处可能不支持的地区并使用 Claude",
+      "patterns": [
+        "(?:我|本人|我们).{0,16}(?:现在|目前|此刻|正在|此时)?(?:人在|身处|位于|住在|在)(?:中国大陆|大陆地区|内地|俄罗斯|伊朗).{0,40}(?:使用|用着|用|登录|正在用|正在使用|访问).{0,8}(?:Claude|claude|克劳德)",
+        "(?:I am|I.m|I’m|we are|we.re|we’re).{0,18}(?:in|located in|living in) (?:mainland China|Russia|Iran).{0,40}(?:using|accessing|logging into) Claude"
+      ],
+      "note": "仅依据用户自述提示地区政策；无法核实所在地、账号状态或后台标记。不以国籍为依据。",
+      "clarify": "如确实在该地区使用Claude，请核对官方Supported Regions Policy。本地提醒不表示已被后台标记或会被封号。"
+    }
+  ]
+}

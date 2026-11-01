@@ -1,0 +1,33 @@
+{
+  "version": "0.6.0",
+  "scope": "pre_enforcement_only",
+  "updated": "2026-11-01",
+  "critical_limits": [
+    "不是 Anthropic 后台 flag、priority、内部执法判定或封禁预测器。",
+    "仅检测用户输入/可见回复/用户同意后取得的环境线索；无法推断服务器已标记。",
+    "历史封禁结局不作为行为与封禁因果的证明；没有封禁前材料的社区自述不进入预警规则。",
+    "同一个主题可能是安全研究、受害者求助、文学或新闻；优先判断目的、授权及行为。"
+  ],
+  "local_observable_signals": [
+    {
+      "id": "prompt-policy-intent",
+      "strength": "contextual",
+      "meaning": "用户本次请求明确要求可执行的可能受限行为（需结合授权、背景判断）。"
+    },
+    {
+      "id": "visible-refusal",
+      "strength": "weak",
+      "meaning": "本次 Claude 回复表面上是拒绝；拒绝不能推断账号被标记。"
+    },
+    {
+      "id": "visible-official-warning",
+      "strength": "direct_display_only",
+      "meaning": "如用户尚未被封且已经实际看到官方警告，可原样解释其提示，不推测后台原因。"
+    },
+    {
+      "id": "region-opt-in",
+      "strength": "weak",
+      "meaning": "用户明确授权时检测出口地区代码及本地时区；时区变化可单独作为环境变化提醒，但不是地区违规或后台标记的证据。"
+    }
+  ]
+}
